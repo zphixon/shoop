@@ -1,26 +1,26 @@
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define _GNU_SOURCE
+#define __USE_GNU
+#include <dlfcn.h>
+
 #include "object.h"
 
-static object* this;
-static int already_linked;
+void make_object(object* this) {
+    void* handle = dlmopen(LM_ID_NEWLM, "./object.so", RTLD_NOW);
+    assert(handle);
+    printf("handle = %p\n", handle);
 
-int getX() {
-    return this->x;
+    typedef void (*fntype_make_object)(object*);
+    fntype_make_object make_object_dl = (fntype_make_object) dlsym(handle, "make_object");
+    assert(!dlerror());
+
+    make_object_dl(this);
 }
 
-void setX(int x) {
-    this->x = x;
+void debug_object(object* this) {
+    printf("object { x = %d }\n", this->x);
 }
-
-void make_object(object* this_) {
-    assert(!already_linked);
-    already_linked = 1;
-
-    this = this_;
-    this->getX = getX;
-    this->setX = setX;
-
-    this->x = 0;
-}
-

@@ -1,6 +1,4 @@
-typedef struct {
-    int (*getX)();
-    void (*setX)(int);
-    int x;
-} object;
+#include "object_impl.h"
 
+void make_object(object*);
+void debug_object(object*);

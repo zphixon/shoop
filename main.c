@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <dlfcn.h>
 
-#include "object_maker.h"
+#include "object.h"
 
 int main() {
     object obj; make_object(&obj);

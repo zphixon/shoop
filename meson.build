@@ -1,16 +1,16 @@
 project('lol', 'c', default_options: ['c_std=c11'])
 
 object_so = shared_library('object',
-  'object.c',
+  'object_impl.c',
   name_prefix: '',
 )
 
-dep = declare_dependency(link_with: object_so)
+object_dep = declare_dependency(link_with: object_so)
 
 executable('main',
   sources: [
     'main.c',
-    'object_maker.c',
+    'object.c',
   ],
-  dependencies: [dep],
+  dependencies: [object_dep],
 )
