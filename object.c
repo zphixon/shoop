@@ -12,13 +12,16 @@
 void make_object(object* this) {
     void* handle = dlmopen(LM_ID_NEWLM, "./object.so", RTLD_NOW);
     assert(handle);
-    printf("handle = %p\n", handle);
 
-    typedef void (*fntype_make_object)(object*);
+    typedef void (*fntype_make_object)(object*, void*);
     fntype_make_object make_object_dl = (fntype_make_object) dlsym(handle, "make_object");
     assert(!dlerror());
 
-    make_object_dl(this);
+    make_object_dl(this, handle);
+}
+
+void free_object(object* this) {
+    assert(!dlclose(this->handle));
 }
 
 void debug_object(object* this) {

@@ -24,4 +24,8 @@ int main() {
 
     // as expected
     assert(obj.getX() != obj2.getX());
+
+    // don't forget to clean up your memory!
+    free_object(&obj);
+    free_object(&obj2);
 }
