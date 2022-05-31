@@ -1,4 +1,5 @@
 #include <assert.h>
+
 #include "object_impl.h"
 
 static object* this;

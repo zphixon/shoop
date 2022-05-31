@@ -1,3 +1,5 @@
+#pragma once
+
 #include "object_impl.h"
 
 void make_object(object*);

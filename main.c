@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <dlfcn.h>
 
 // just include your class header
 #include "object.h"
